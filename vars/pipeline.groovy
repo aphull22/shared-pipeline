@@ -10,8 +10,8 @@ class devClasses {
 
 
 def call(body){
-	preBuild = new org.sdp.core.preBuild()
-	postBuild = new org.sdp.core.postBuild()
+	preBuild = new org.core.preBuild()
+	postBuild = new org.core.postBuild()
 	
 	//DECLARE NODE
 	node {
