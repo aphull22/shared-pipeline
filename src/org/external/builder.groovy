@@ -16,14 +16,8 @@ def run(List<String> projectList){
 		stage('Build image and push to ECR for $item') {
 			def ecrRepositoryName = item
         		imageVersion = buildImage(ecrRepositoryName)
-
-			stage('Security Scan for $item') {
-                        	aquaMicroscanner imageName: "${ecrRepositoryName}:${imageVersion}", notCompliesCmd: "exit 0", onDisallowed: "ignore", outputFormat: "html"
-                        }
-
-                       createRepo(ecrRepositoryName)
-                       pushImages(ecrRepositoryName, imageVersion, ecrAWSAccountId)
-                       runDocker("rmi -f ${ecrRepositoryName}:${imageVersion}")
+                        pushImages(ecrRepositoryName, imageVersion, ecrAWSAccountId)
+                        runDocker("rmi -f ${ecrRepositoryName}:${imageVersion}")
                 }
          }           
 }

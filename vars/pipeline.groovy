@@ -8,13 +8,12 @@ class devClasses {
 
 }
 
-
 def call(body){
 	preBuild = new org.core.preBuild()
 	postBuild = new org.core.postBuild()
 	
 	//DECLARE NODE
-	node {
+	node('docker') {
 		//DECLARE WRAPPER CLSSES
     		wrap([$class: 'BuildUser']) {
     			wrap([$class: 'MaskPasswordsBuildWrapper']) {
