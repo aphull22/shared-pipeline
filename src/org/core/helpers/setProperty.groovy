@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 package org.core.helpers
 
-def environment(Map setup) {
+def environment() {
 	// GIT
 	env.gitUrlRoot = "https://github.com/audiomack/audiomack-services"
 	env.gitUrl = "${gitUrlRoot}.git"
@@ -16,7 +16,7 @@ def environment(Map setup) {
 
 }
 
-def job(Map setup){
+def job(){
 	properties(
         	[
         		disableConcurrentBuilds(),
