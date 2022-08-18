@@ -1,0 +1,29 @@
+setup = [
+	ecrRepositoryName = ""
+]
+
+projectList = []
+if(params.eventprocessorworker == true) {
+	projectList.add("event-processor-worker")
+}
+if(params.eventgeneratorworker == true) {
+	projectList.add("event-generator-worker")
+}
+
+
+
+pipeline(setup){
+	for(item in projectList) {
+		stage('Build image and push to ECR for $item') {
+			def ecrRepositoryName = item
+        		buildImage(ecrRepositoryName)
+
+			stage('Security Scan for $item') {
+                        	aquaMicroscanner imageName: "${ecrRepositoryName}:${imageVersion}", notCompliesCmd: "exit 0", onDisallowed: "ignore", outputFormat: "html"
+                        }
+                       createRepo(ecrRepositoryName)
+                       pushImages(ecrRepositoryName, imageVersion, ecrAWSAccountId)
+                       runDocker("rmi -f ${ecrRepositoryName}:${imageVersion}")
+                }
+         }           
+}
