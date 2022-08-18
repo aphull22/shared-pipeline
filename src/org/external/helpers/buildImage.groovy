@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package org.external
+package org.external.helpers
 
 def run(String ecrRepositoryName) {
 	def describeECRImagesCmd = "aws ecr describe-images --region ${awsRegion} --registry-id ${ecrAWSAccountIdProd} --repository-name ${ecrRepositoryName} --output json --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]'"

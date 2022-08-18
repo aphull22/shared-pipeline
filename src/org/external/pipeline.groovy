@@ -1,18 +1,15 @@
-setup = [
-	ecrRepositoryName = ""
-]
+#!/usr/bin/groovy
+package org.external
 
-projectList = []
-if(params.eventprocessorworker == true) {
-	projectList.add("event-processor-worker")
-}
-if(params.eventgeneratorworker == true) {
-	projectList.add("event-generator-worker")
-}
+def run(List<String>projectList){
+	def buildImage = new org.external.helpers.buildImage() 
+	def lintDocker = new org.external.helpers.lintDocker()
+	def pushImages = new org.external.helpers.pushImages()
+	def removeAutoDeleteImages = new org.external.helpers.removeAutoDeleteImages()
+	def runDocker = new org.external.helpers.runDocker.groovy
 
-
-
-pipeline(setup){
+	
+	projectList = projectList
 	for(item in projectList) {
 		stage('Build image and push to ECR for $item') {
 			def ecrRepositoryName = item

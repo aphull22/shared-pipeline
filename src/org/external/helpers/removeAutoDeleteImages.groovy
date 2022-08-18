@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package org.external
+package org.external.helpers
 
 def run() {
 	runDocker = new org.external.runDocker()

@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package org.external
+package org.external.helpers
 
 def run(ecrRepositoryName, tag, account) {
     stage('Pushing image') {
