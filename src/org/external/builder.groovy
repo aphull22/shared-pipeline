@@ -6,7 +6,7 @@ def run(List<String> projectList){
 	def lintDocker = new org.external.helpers.lintDocker()
 	def pushImages = new org.external.helpers.pushImages()
 	def removeAutoDeleteImages = new org.external.helpers.removeAutoDeleteImages()
-	def runDocker = new org.external.helpers.runDocker.groovy
+	def runDocker = new org.external.helpers.runDocker.groovy()
 	
 	//ecrAWSAccountId is declared in src.org.helpers.setProperty()
 	ecrAWSAccountId = env.ecrAWSAccountId
