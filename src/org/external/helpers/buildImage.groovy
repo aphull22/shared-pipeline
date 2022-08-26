@@ -15,9 +15,6 @@ def run(String ecrRepositoryName) {
         }
         echo 'Next Image Version: ' + imageVersion
         def gitHash=sh (returnStdout: true, script: "git rev-parse HEAD").trim()
-        def dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss")
-        def date = new Date()
-        def buildDate = (dateFormat.format(date)) 
- sh("docker build --label org.label-schema.build-date=${buildDate} --label org.label-schema.vendor=Audiomack --label org.label-schema.name=${ecrRepositoryName} --label org.label-schema.version=${imageVersion} --label org.label-schema.vcs-ref=${gitHash} -t ${ecrAWSAccountId}.dkr.ecr.us-east-1.amazonaws.com/${ecrRepositoryName}:${imageVersion} --no-cache --pull -f Dockerfile .")
+ 	sh("docker build --label org.label-schema.vendor=Audiomack --label org.label-schema.name=${ecrRepositoryName} --label org.label-schema.version=${imageVersion} --label org.label-schema.vcs-ref=${gitHash} -t ${ecrAWSAccountId}.dkr.ecr.us-east-1.amazonaws.com/${ecrRepositoryName}:${imageVersion} --no-cache --pull -f Dockerfile .")
 	return imageVersion
 }
